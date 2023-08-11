@@ -191,6 +191,185 @@
   </div>
 
 
+  <div class="p-20">
+      <div class="header flex items-center pl-4 bg-white mb-1" :style="{
+          'width': '690px',
+          'height': '40px',
+      }">
+          <h5 class="font-semibold">{{ i18n('Получить метрики по СМИ') }}</h5>
+      </div>
+
+      <form class="w-full p-4 bg-white" :style="{
+          'width': '690px',
+      }" @submit.prevent>
+          <div class="flex">
+              <div class="px-3" :style="{
+                  'min-width': '320px'
+              }">
+                  <label class="block" for="smi_project_id">
+                      {{ i18n('ID проекта') }}
+                  </label>
+                  <input id="smi_project_id" type="text" :placeholder="i18n('ID проекта')"
+                      class="form-control mb-3" />
+                  <div class="" :style="{
+                      'max-height': '34px'
+                  }">
+                      <div class="date-container flex flex-wrap justify-between w-full items-center mb-3" style="height:34px">
+                          {{ i18n('от') }} <input type="date" style="padding:0 5px;background:buttonface;border-radius:3px;width:110px;"
+                              class="mx-2 h-full" id="s_date" :value="s_date">
+                          {{ i18n('до') }} <input type="date" style="padding:0 5px;background:buttonface;border-radius:3px;width:110px;"
+                              class="ml-2 h-full" id="f_date" :value="f_date">
+                      </div>
+                      <button class="flex text-white font-bold py-1 px-4 border rounded ml-auto get_project_metrics"
+                          @click="getProjectSmiMetrics">
+                          {{ i18n('Применить') }}
+                      </button>
+                  </div>
+              </div>
+              <div class="metrics w-full" v-show="smiMetrics.show">
+                  <div class="metric__row flex items-center mb-2">
+                      <div class="metric__name whitespace-nowrap text-center py-1 border-2 border-cyan-600 bg-cyan-600 text-white mr-1"
+                          :style="{
+                              'min-width': '130px',
+                              'max-width': '130px',
+                          }">{{ i18n('ID проекта') }}
+                      </div>
+                      <div class="metric__value w-full text-center py-1 border-2 border-cyan-600">{{
+                          smiMetrics.project_id
+                      }}
+                      </div>
+                  </div>
+                  <div class="metric__row flex items-center mb-2">
+                      <div class="metric__name whitespace-nowrap text-center py-1 border-2 border-cyan-600 bg-cyan-600 text-white mr-1"
+                          :style="{
+                              'min-width': '130px',
+                              'max-width': '130px',
+                          }">{{ i18n('Название проекта') }}</div>
+                      <div class="metric__value w-full text-center py-1 border-2 border-cyan-600">{{
+                          smiMetrics.project_name
+                      }}
+                      </div>
+                  </div>
+                  <div class="metric__row flex items-center mb-2">
+                      <div class="metric__name whitespace-nowrap text-center py-1 border-2 border-cyan-600 bg-cyan-600 text-white mr-1"
+                          :style="{
+                              'min-width': '130px',
+                              'max-width': '130px',
+                          }">{{ i18n('Автор') }}</div>
+                      <div class="metric__value w-full text-center py-1 border-2 border-cyan-600">{{
+                          smiMetrics.username
+                      }}</div>
+                  </div>
+                  <div class="metric__row flex items-center mb-2">
+                      <div class="metric__name whitespace-nowrap text-center py-1 border-2 border-cyan-600 bg-cyan-600 text-white mr-1"
+                          :style="{
+                              'min-width': '130px',
+                              'max-width': '130px',
+                          }">
+                          {{ i18n('Аудитория/Охват') }}</div>
+                      <div class="metric__value w-full text-center py-1 border-2 border-cyan-600">{{
+                          smiMetrics.audience
+                      }}</div>
+                  </div>
+              </div>
+          </div>
+      </form>
+  </div>
+
+
+  <div class="p-20">
+      <div class="header flex items-center pl-4 bg-white mb-1" :style="{
+          'width': '690px',
+          'height': '40px',
+      }">
+          <h5 class="font-semibold">{{ i18n('Обновление метрик по преокту') }}</h5>
+      </div>
+
+      <form class="w-full p-4 bg-white" :style="{
+          'width': '690px',
+      }" @submit.prevent>
+          <div class="flex">
+              <div class="px-3" :style="{
+                  'min-width': '320px'
+              }">
+                  <label class="block" for="smi_project_id">
+                      {{ i18n('ID проекта') }}
+                  </label>
+                  <input id="smi_project_id" type="text" :placeholder="i18n('ID проекта')"
+                      class="form-control mb-3" />
+                  <div class="" :style="{
+                      'max-height': '34px'
+                  }">
+                      <div class="date-container flex flex-wrap justify-between w-full items-center mb-3" style="height:34px">
+                          {{ i18n('от') }} <input type="date" style="padding:0 5px;background:buttonface;border-radius:3px;width:110px;"
+                              class="mx-2 h-full" id="s_date" :value="s_date">
+                          {{ i18n('до') }} <input type="date" style="padding:0 5px;background:buttonface;border-radius:3px;width:110px;"
+                              class="ml-2 h-full" id="f_date" :value="f_date">
+                      </div>
+                      <div class="flex">
+                            <button class="flex text-white font-bold py-1 px-4 border rounded ml-auto get_project_metrics"
+                                @click="updateMetrics">
+                                {{ i18n('Проверить') }}
+                            </button>
+                            <button class="flex text-white font-bold py-1 px-4 border rounded ml-auto get_project_metrics"
+                                @click="updateMetrics">
+                                {{ i18n('Применить') }}
+                            </button>
+                      </div>
+                     
+                  </div>
+              </div>
+              <!-- <div class="metrics w-full" v-show="smiMetrics.show">
+                  <div class="metric__row flex items-center mb-2">
+                      <div class="metric__name whitespace-nowrap text-center py-1 border-2 border-cyan-600 bg-cyan-600 text-white mr-1"
+                          :style="{
+                              'min-width': '130px',
+                              'max-width': '130px',
+                          }">{{ i18n('ID проекта') }}
+                      </div>
+                      <div class="metric__value w-full text-center py-1 border-2 border-cyan-600">{{
+                          smiMetrics.project_id
+                      }}
+                      </div>
+                  </div>
+                  <div class="metric__row flex items-center mb-2">
+                      <div class="metric__name whitespace-nowrap text-center py-1 border-2 border-cyan-600 bg-cyan-600 text-white mr-1"
+                          :style="{
+                              'min-width': '130px',
+                              'max-width': '130px',
+                          }">{{ i18n('Название проекта') }}</div>
+                      <div class="metric__value w-full text-center py-1 border-2 border-cyan-600">{{
+                          smiMetrics.project_name
+                      }}
+                      </div>
+                  </div>
+                  <div class="metric__row flex items-center mb-2">
+                      <div class="metric__name whitespace-nowrap text-center py-1 border-2 border-cyan-600 bg-cyan-600 text-white mr-1"
+                          :style="{
+                              'min-width': '130px',
+                              'max-width': '130px',
+                          }">{{ i18n('Автор') }}</div>
+                      <div class="metric__value w-full text-center py-1 border-2 border-cyan-600">{{
+                          smiMetrics.username
+                      }}</div>
+                  </div>
+                  <div class="metric__row flex items-center mb-2">
+                      <div class="metric__name whitespace-nowrap text-center py-1 border-2 border-cyan-600 bg-cyan-600 text-white mr-1"
+                          :style="{
+                              'min-width': '130px',
+                              'max-width': '130px',
+                          }">
+                          {{ i18n('Аудитория/Охват') }}</div>
+                      <div class="metric__value w-full text-center py-1 border-2 border-cyan-600">{{
+                          smiMetrics.audience
+                      }}</div>
+                  </div>
+              </div> -->
+          </div>
+      </form>
+  </div>
+
+
 </template>
 
 <script>
@@ -258,6 +437,9 @@ export default {
                   console.log('error', error)
               });
       },
+      updateMetrics() {
+        let s_date = document.guerySelector*''
+      }
       // getMetrics() {
       //   let input_folders_id = document.getElementById('grid-password').value;
 
